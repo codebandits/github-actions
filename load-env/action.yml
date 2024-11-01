@@ -1,0 +1,15 @@
+name: Load .env
+description: Loads values from an .env file.
+
+inputs:
+  path:
+    description: The .env file to load.
+    required: true
+
+outputs:
+  generic:
+    description: This action will have generic output variables based on the .env file.
+
+runs:
+  using: node20
+  main: dist/index.js

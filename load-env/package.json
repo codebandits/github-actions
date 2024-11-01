@@ -1,0 +1,17 @@
+{
+  "name": "load-env",
+  "version": "1.0.0",
+  "description": "Load values from a .env file in GitHub Actions.",
+  "scripts": {
+    "package": "ncc build src/index.ts --minify --v8-cache"
+  },
+  "devDependencies": {
+    "@types/node": "^22.8.6",
+    "@vercel/ncc": "^0.38.1",
+    "typescript": "^5.5.2"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "dotenv": "^16.4.5"
+  }
+}
