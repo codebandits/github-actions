@@ -1,0 +1,58 @@
+name: load-env Publish
+
+on:
+  workflow_dispatch:
+
+jobs:
+  validate-release:
+    name: Validate Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate Changelog
+        uses: denisa/clq-action@v1
+        id: changelog
+        with:
+          changelog: load-env/CHANGELOG.md
+          changeMap: .github/clq/changemap.json
+          mode: release
+
+      - name: Validate Tag
+        uses: denisa/semantic-tag-helper@v1
+        with:
+          mode: test
+          tag: "load-env-${{ steps.changelog.outputs.tag }}"
+
+  publish:
+    name: Publish
+    if: github.ref == 'refs/heads/main' && github.repository == 'codebandits/github-actions'
+    needs: [ validate-release ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get Changelog
+        uses: denisa/clq-action@v1
+        id: changelog
+        with:
+          changelog: load-env/CHANGELOG.md
+          changeMap: .github/clq/changemap.json
+          mode: release
+
+      - name: Set Tag
+        uses: denisa/semantic-tag-helper@v1
+        with:
+          mode: set
+          tag: "load-env-${{ steps.changelog.outputs.tag }}"
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: "load-env-${{ steps.changelog.outputs.tag }}"
+          prerelease: ${{ steps.changelog.outputs.status == 'prereleased' }}
+          name: "load-env ${{ steps.changelog.outputs.version }}"
+          body: ${{ steps.changelog.outputs.changes }}

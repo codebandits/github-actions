@@ -1,0 +1,28 @@
+name: load-env CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'load-env/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'load-env/**'
+
+jobs:
+
+  validate-changelog:
+    name: Validate Changelog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate Changelog
+        uses: denisa/clq-action@v1
+        with:
+          changelog: load-env/CHANGELOG.md
+          changeMap: .github/clq/changemap.json
+          mode: feature
