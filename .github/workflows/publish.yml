@@ -1,4 +1,4 @@
-name: load-env Publish
+name: Publish
 
 on:
   workflow_dispatch:
@@ -14,7 +14,6 @@ jobs:
         uses: denisa/clq-action@v1
         id: changelog
         with:
-          changelog: load-env/CHANGELOG.md
           changeMap: .github/clq/changemap.json
           mode: release
 
@@ -22,7 +21,7 @@ jobs:
         uses: denisa/semantic-tag-helper@v1
         with:
           mode: test
-          tag: "load-env-${{ steps.changelog.outputs.tag }}"
+          tag: ${{ steps.changelog.outputs.tag }}
 
   publish:
     name: Publish
@@ -39,7 +38,6 @@ jobs:
         uses: denisa/clq-action@v1
         id: changelog
         with:
-          changelog: load-env/CHANGELOG.md
           changeMap: .github/clq/changemap.json
           mode: release
 
@@ -47,12 +45,12 @@ jobs:
         uses: denisa/semantic-tag-helper@v1
         with:
           mode: set
-          tag: "load-env-${{ steps.changelog.outputs.tag }}"
+          tag: ${{ steps.changelog.outputs.tag }}
 
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          tag: "load-env-${{ steps.changelog.outputs.tag }}"
+          tag: ${{ steps.changelog.outputs.tag }}
           prerelease: ${{ steps.changelog.outputs.status == 'prereleased' }}
-          name: "load-env ${{ steps.changelog.outputs.version }}"
+          name: ${{ steps.changelog.outputs.version }}
           body: ${{ steps.changelog.outputs.changes }}
