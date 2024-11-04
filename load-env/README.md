@@ -21,7 +21,7 @@ jobs:
 
       - name: Load Configuration
         id: configuration
-        uses: codebandits/github-actions/load-env@main
+        uses: codebandits/github-actions/load-env@v1
         with:
           path: .env
 
