@@ -1,4 +1,4 @@
-# load-env Github Action
+# load-env GitHub Action
 
 The **load-env** action provides .env key-value pairs as outputs for use in workflows.
 
