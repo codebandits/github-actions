@@ -1,0 +1,35 @@
+name: Next Repository Tag Number
+description: Get the next tag number for a repository.
+
+inputs:
+  repository_url:
+    description: The URL of the OCI-compatible repository.
+    required: true
+  bearer_token:
+    description: Optional bearer token for repository authentication.
+    required: false
+  initial_number:
+    description: Starting tag number if no tags exist.
+    default: '1'
+    required: false
+  tag_prefix:
+    description: Prefix for the tags.
+    default: 'build-'
+    required: false
+
+outputs:
+  tag:
+    description: The next tag.
+    value: ${{ steps.next-tag.outputs.tag }}
+  number:
+    description: The next tag number.
+    value: ${{ steps.next-tag.outputs.number }}
+
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.repository_url }}
+    - ${{ inputs.bearer_token }}
+    - ${{ inputs.initial_number }}
+    - ${{ inputs.tag_prefix }}
