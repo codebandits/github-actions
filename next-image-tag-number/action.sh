@@ -1,6 +1,10 @@
 #!/usr/bin/env sh
 
-REPOSITORY_URL=$1
+if ! echo "$1" | grep -q "^http"; then
+  IMAGE_REPOSITORY_URL="https://$1"
+else
+  IMAGE_REPOSITORY_URL="$1"
+fi
 BEARER_TOKEN=$2
 INITIAL_NUMBER=${3:-1}
 TAG_PREFIX=${4:-"build-"}
@@ -11,7 +15,7 @@ else
   AUTH_HEADER=""
 fi
 
-TAGS=$(curl -s $AUTH_HEADER "${REPOSITORY_URL}/tags/list" | jq -r '.tags[]' || echo "")
+TAGS=$(curl -s $AUTH_HEADER "${IMAGE_REPOSITORY_URL}/tags/list" | jq -r '.tags[]' || echo "")
 
 if [ -z "$TAGS" ]; then
   echo "No existing tags were found. Using initial tag number ${INITIAL_NUMBER}."

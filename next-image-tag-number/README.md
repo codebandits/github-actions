@@ -17,7 +17,7 @@ jobs:
         id: next-tag
         uses: codebandits/github-actions/next-image-tag-number@main
         with:
-          image_repository_url: https://registry.example.com/v2/my-repo/my-image
+          image_repository_url: registry.example.com/repository/image
           bearer_token: ${{ secrets.REPO_BEARER_TOKEN }}
           initial_number: 100
           tag_prefix: build-
@@ -27,7 +27,7 @@ jobs:
 
 ## Inputs
 
-- `image_repository_url:` **Required.** The URL of the OCI-compatible image repository.
+- `image_repository_url:` **Required.** The URL of the OCI-compatible image repository. If the protocol is omitted, https is assumed.
 - `bearer_token:` Optional. The bearer token for repository authentication. Defaults to empty (no authentication).
 - `initial_number:` Optional. Starting tag number if no tags exist in the repository. Defaults to 1.
 - `tag_prefix:` Optional. Prefix for the tags. Defaults to build-.
