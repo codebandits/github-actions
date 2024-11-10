@@ -20,10 +20,8 @@ inputs:
 outputs:
   tag:
     description: The next tag, including the prefix and tag number.
-    value: ${{ steps.next-tag.outputs.tag }}
   number:
     description: The next tag number.
-    value: ${{ steps.next-tag.outputs.number }}
 
 runs:
   using: docker
