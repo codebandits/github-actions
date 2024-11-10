@@ -1,0 +1,22 @@
+name: Set Vendir Channels Path to Imgpkg Bundle
+description: Sets a vendir directory to a imgpkg bundle image.
+
+inputs:
+  channel_name:
+    description: "The path under the channels directory to update."
+    required: true
+  imgpkg_bundle_image:
+    description: "The imgpkg bundle image."
+    required: true
+  path:
+    description: "The base directory path where vendir.yml is located."
+    required: false
+    default: "."
+
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.channel_name }}
+    - ${{ inputs.imgpkg_bundle_image }}
+    - ${{ inputs.path }}

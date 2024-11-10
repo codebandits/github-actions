@@ -6,8 +6,8 @@ else
   IMAGE_REPOSITORY_URL="$1"
 fi
 BEARER_TOKEN=$2
-INITIAL_NUMBER=${3:-1}
-TAG_PREFIX=${4:-"build-"}
+INITIAL_NUMBER=${3}
+TAG_PREFIX=${4}
 
 if [ -n "$BEARER_TOKEN" ]; then
   AUTH_HEADER="-H \"Authorization: Bearer ${BEARER_TOKEN}\""
