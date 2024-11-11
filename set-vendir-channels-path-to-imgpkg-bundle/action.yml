@@ -3,18 +3,18 @@ description: Sets a vendir directory to a imgpkg bundle image.
 
 inputs:
   channel_name:
-    description: "The path under the channels directory to update."
+    description: The path under the channels directory to update.
     required: true
   imgpkg_bundle_image:
-    description: "The imgpkg bundle image."
+    description: The imgpkg bundle image.
     required: true
   bearer_token:
     description: Optional bearer token for authentication.
     required: false
   path:
-    description: "The base directory path where vendir.yml is located."
+    description: The base directory path where vendir.yml is located.
     required: false
-    default: "."
+    default: '.'
 
 runs:
   using: docker
