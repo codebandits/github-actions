@@ -17,7 +17,8 @@ else
   AUTH_HEADER=""
 fi
 
-TAGS=$(curl -s $AUTH_HEADER "${IMAGE_REPOSITORY_URL}/tags/list" | jq -r '.tags[]' || echo "")
+TAGS_LIST_JSON=$(curl -s $AUTH_HEADER "${IMAGE_REPOSITORY_URL}/tags/list")
+TAGS=$(echo "$TAGS_LIST_JSON" | jq -r '.tags[]' || echo "")
 
 if [ -z "$TAGS" ]; then
   echo "No existing tags were found. Using initial tag number ${INITIAL_NUMBER}."
