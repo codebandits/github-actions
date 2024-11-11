@@ -13,7 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Initial release of the set-vendir-channels-path-to-imgpkg-bundle action.
+- Initial release of the set-imgpkg-bundle-as-vendir-path action.
+
+### Fixed
+
+- Run docker actions as a non-root user.
 
 ## [1.1.0] - 2024-11-10
 
