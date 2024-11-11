@@ -31,4 +31,8 @@ yq -i "
     | .directories |= sort_by(.path == \"channels\" | not)
 " "$VENDIR_FILE"
 
-vendir sync
+if [ -n "$BEARER_TOKEN" ]; then
+  IMGPKG_TOKEN="$BEARER_TOKEN" vendir sync
+else
+  vendir sync
+fi
