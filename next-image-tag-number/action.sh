@@ -17,7 +17,7 @@ else
   AUTH_HEADER=""
 fi
 
-TAGS_LIST_JSON=$(curl -s $AUTH_HEADER "${IMAGE_REPOSITORY_URL}/tags/list")
+TAGS_LIST_JSON=$(curl -fs $AUTH_HEADER "${IMAGE_REPOSITORY_URL}/tags/list")
 TAGS=$(echo "$TAGS_LIST_JSON" | jq -r '.tags[]' || echo "")
 
 if [ -z "$TAGS" ]; then
