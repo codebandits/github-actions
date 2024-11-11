@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -e
+
 CHANNEL_NAME=$1
 IMGPKG_BUNDLE_IMAGE=$2
 BASE_PATH=$3

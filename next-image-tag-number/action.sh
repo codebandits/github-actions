@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -e
+
 if ! echo "$1" | grep -q "^http"; then
   IMAGE_REPOSITORY_URL="https://$1"
 else
