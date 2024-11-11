@@ -2,14 +2,11 @@
 
 set -e
 
-if ! echo "$1" | grep -q "^http"; then
-  IMAGE_REPOSITORY_URL="https://$1"
-else
-  IMAGE_REPOSITORY_URL="$1"
-fi
-BEARER_TOKEN=$2
-INITIAL_NUMBER=${3}
-TAG_PREFIX=${4}
+REPOSITORY_API_URL=$1
+IMAGE_NAME=$2
+BEARER_TOKEN=$3
+INITIAL_NUMBER=$4
+TAG_PREFIX=$5
 
 if [ -n "$BEARER_TOKEN" ]; then
   AUTH_HEADER="-H \"Authorization: Bearer ${BEARER_TOKEN}\""
@@ -17,7 +14,7 @@ else
   AUTH_HEADER=""
 fi
 
-TAGS_LIST_JSON=$(curl -fs $AUTH_HEADER "${IMAGE_REPOSITORY_URL}/tags/list")
+TAGS_LIST_JSON=$(curl -fs $AUTH_HEADER "${REPOSITORY_API_URL}/${IMAGE_NAME}/tags/list")
 TAGS=$(echo "$TAGS_LIST_JSON" | jq -r '.tags[]' || echo "")
 
 if [ -z "$TAGS" ]; then

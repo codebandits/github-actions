@@ -2,11 +2,14 @@ name: Next Image Tag Number
 description: Get the next tag number for an image in an OCI repository.
 
 inputs:
-  image_repository_url:
-    description: The URL of the OCI-compatible image repository.
+  repository_api_url:
+    description: The full URL of the OCI-compatible repository API.
+    required: true
+  image:
+    description: The name of the image within the specified repository.
     required: true
   bearer_token:
-    description: Optional bearer token for repository authentication.
+    description: Optional bearer token for authentication.
     required: false
   initial_number:
     description: Starting tag number if no tags exist.
@@ -27,7 +30,8 @@ runs:
   using: docker
   image: Dockerfile
   args:
-    - ${{ inputs.image_repository_url }}
+    - ${{ inputs.repository_api_url }}
+    - ${{ inputs.image }}
     - ${{ inputs.bearer_token }}
     - ${{ inputs.initial_number }}
     - ${{ inputs.tag_prefix }}
