@@ -4,7 +4,8 @@ set -e
 
 CHANNEL_NAME=$1
 IMGPKG_BUNDLE_IMAGE=$2
-BASE_PATH=$3
+BEARER_TOKEN=$3
+BASE_PATH=$4
 
 mkdir -p "$BASE_PATH"
 cd "$BASE_PATH"
@@ -29,3 +30,5 @@ yq -i "
     )
     | .directories |= sort_by(.path == \"channels\" | not)
 " "$VENDIR_FILE"
+
+vendir sync

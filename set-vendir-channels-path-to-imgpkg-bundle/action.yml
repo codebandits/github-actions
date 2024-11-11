@@ -8,6 +8,9 @@ inputs:
   imgpkg_bundle_image:
     description: "The imgpkg bundle image."
     required: true
+  bearer_token:
+    description: Optional bearer token for authentication.
+    required: false
   path:
     description: "The base directory path where vendir.yml is located."
     required: false
@@ -19,4 +22,5 @@ runs:
   args:
     - ${{ inputs.channel_name }}
     - ${{ inputs.imgpkg_bundle_image }}
+    - ${{ inputs.bearer_token }}
     - ${{ inputs.path }}
