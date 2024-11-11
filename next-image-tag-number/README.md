@@ -15,7 +15,7 @@ jobs:
 
       - name: Get Next Image Tag Number
         id: next-tag
-        uses: codebandits/github-actions/next-image-tag-number@main
+        uses: codebandits/github-actions/next-image-tag-number@v1
         with:
           image_repository_url: registry.example.com/repository/image
           bearer_token: ${{ secrets.REPO_BEARER_TOKEN }}

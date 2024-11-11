@@ -35,7 +35,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Update latest release channel
-        uses: codebandits/github-actions/set-imgpkg-bundle-as-vendir-path@main
+        uses: codebandits/github-actions/set-imgpkg-bundle-as-vendir-path@v1
         with:
           channel_name: latest
           imgpkg_bundle_image: registry.example.com/repository/bundle:build-2
