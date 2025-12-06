@@ -27,6 +27,7 @@ yq -i "
       .directories[] | select(.path == \"channels\");
       .contents = [{\"path\": \"$CHANNEL_NAME\", \"imgpkgBundle\": {\"image\": \"$IMGPKG_BUNDLE_IMAGE\"}}] + .contents
         | .contents |= unique_by(.path)
+        | sort_by(.path)
     )
     | .directories |= sort_by(.path == \"channels\" | not)
 " "$VENDIR_FILE"
